@@ -13,22 +13,22 @@ on:
 
 jobs:
   build:
-    - name: Build & push docker image
+    name: Build & push docker image
     uses: absalon-github-org/rwf/.github/workflows/python-web-api-aks-deploy.yaml@main
+
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
       REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
       RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
-    - name: Print choice (github.event.inputs.name)
-      run: echo "${{ github.event.inputs.name }}"
 
   deploy:
     name: Deploy on AKS
     uses: absalon-github-org/rwf/.github/workflows/api-deploy-aks.yaml@main
     needs: build
     with:
+      targetEnvironment: ${{ github.event.inputs.name }}
       environment: ${{ github.ref_name }}
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
