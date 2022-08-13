@@ -1,0 +1,17 @@
+config:
+  data:
+    VARIABLE1: value1
+    VARIABLE2: 'value2'
+
+secret:
+  data:
+    # Values must be encoded as base64 (for example: echo -n 'SOME_SECRET' | base64)
+    DDBB_USER: #{DDBB_USER}#
+    DDBB_PASS: #{DDBB_PASS}#
+
+deployment:
+  namespace: ns-name
+  liveness-path: /health
+  liveness-initialDelay: '60'
+  ingress-enabled: true
+  cpu-base: '100m'
