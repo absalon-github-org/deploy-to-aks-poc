@@ -7,8 +7,8 @@ jobs:
   build:
     #uses: Blue-Express/bx_templates/.github/workflows/build-java.yml@blue
     uses: absalon-github-org/rwf/.github/workflows/python-web-api-aks-deploy.yaml@main
-    # secrets:
-    #   AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
     #   REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
     #   REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
     #   REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
