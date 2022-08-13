@@ -1,17 +1,41 @@
 config:
+  name: __MSNAME__-config
   data:
     VARIABLE1: value1
     VARIABLE2: 'value2'
 
 secret:
+  name: __MSNAME__-secret
   data:
     # Values must be encoded as base64 (for example: echo -n 'SOME_SECRET' | base64)
     DDBB_USER: #{DDBB_USER}#
     DDBB_PASS: #{DDBB_PASS}#
 
-deployment:
-  namespace: ns-name
-  liveness-path: /health
-  liveness-initialDelay: '60'
+customValues:
+  
+
+  namespace: 'test-namespace'
+  replicas: '1'
+
+  livenessPath: '/health'
+  livenessProbe.httpGet.path: '/liveness-get-path'
+  livenessProbe.initialDelaySeconds: '60'
+  livenessProbe.periodSeconds: '10'
+  livenessProbe.timeoutSeconds: '10'
+  livenessProbe.failureThreshold: '3'
+
+  readinessPath: '/readiness'
+  readinessProbe.httpGet.path: '/readiness-get-path'
+  readinessProbe.initialDelaySeconds: '20'
+  readinessProbe.periodSeconds: '5'
+  readinessProbe.timeoutSeconds: '10'
+  readinessProbe.failureThreshold: '3'
+
+  resources.requests.cpu: '100m'
+  resources.requests.memory: '100Mi'
+  resources.limits.cpu: '200m'
+  resources.limits.memory: '300Mi'
+  
   ingress-enabled: true
-  cpu-base: '100m'
+  ingress.annotations.healthcheckPath: '/health'
+  ingress.spec.httpPaths: '/api/test*'  
