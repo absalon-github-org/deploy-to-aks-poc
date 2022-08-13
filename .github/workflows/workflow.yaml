@@ -2,10 +2,18 @@ name: test deploy AKS
 
 on:
   workflow_dispatch:
+    inputs:
+        name:
+          type: choice
+          description: Deploy on
+          options: 
+          - dev
+          - qa
+          required: true
 
 jobs:
   build:
-    name: Build & push docker image
+    - name: Build & push docker image
     uses: absalon-github-org/rwf/.github/workflows/python-web-api-aks-deploy.yaml@main
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
@@ -13,8 +21,11 @@ jobs:
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
       RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
+    - name: Print choice (github.event.inputs.name)
+      run: echo "${{ github.event.inputs.name }}"
 
   deploy:
+    name: Deploy on AKS
     uses: absalon-github-org/rwf/.github/workflows/api-deploy-aks.yaml@main
     needs: build
     with:
