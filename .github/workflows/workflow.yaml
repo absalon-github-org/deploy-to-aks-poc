@@ -36,3 +36,4 @@ jobs:
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
       RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
+      ALL_JSON_SECRETS: ${{ toJSON(secrets) }}
