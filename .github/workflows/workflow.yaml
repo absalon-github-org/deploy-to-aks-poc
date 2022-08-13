@@ -5,7 +5,6 @@ on:
 
 jobs:
   build:
-    #uses: Blue-Express/bx_templates/.github/workflows/build-java.yml@blue
     uses: absalon-github-org/rwf/.github/workflows/python-web-api-aks-deploy.yaml@main
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
