@@ -12,30 +12,36 @@ secret:
     DDBB_PASS: #{DDBB_PASS}#
 
 customValues:
-  
-
   namespace: 'test-namespace'
   replicas: '1'
 
   livenessPath: '/health'
-  livenessProbe.httpGet.path: '/liveness-get-path'
-  livenessProbe.initialDelaySeconds: '60'
-  livenessProbe.periodSeconds: '10'
-  livenessProbe.timeoutSeconds: '10'
-  livenessProbe.failureThreshold: '3'
+  livenessProbe:
+    httpGet.path: '/liveness-get-path'
+    initialDelaySeconds: '60'
+    periodSeconds: '10'
+    timeoutSeconds: '10'
+    failureThreshold: '3'
 
   readinessPath: '/readiness'
-  readinessProbe.httpGet.path: '/readiness-get-path'
-  readinessProbe.initialDelaySeconds: '20'
-  readinessProbe.periodSeconds: '5'
-  readinessProbe.timeoutSeconds: '10'
-  readinessProbe.failureThreshold: '3'
+  readinessProbe:
+    httpGet.path: '/readiness-get-path'
+    initialDelaySeconds: '20'
+    periodSeconds: '5'
+    timeoutSeconds: '10'
+    failureThreshold: '3'
 
-  resources.requests.cpu: '100m'
-  resources.requests.memory: '100Mi'
-  resources.limits.cpu: '200m'
-  resources.limits.memory: '300Mi'
+  resources:
+    requests:
+      cpu: '100m'
+      memory: '100Mi'
+    limits:
+      cpu: '200m'
+      memory: '300Mi'
   
-  ingress-enabled: true
-  ingress.annotations.healthcheckPath: '/health'
-  ingress.spec.httpPaths: '/api/test*'  
+  ingress:
+    enabled: true
+    annotations:
+      healthcheckPath: '/health'
+    spec:
+      httpPaths: '/api/test*'  
